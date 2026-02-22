@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct WikiPlacesApp: App {
+    @StateObject private var viewModel = LocationsViewModel(service: LocationService())
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LocationsListView(viewModel: viewModel)
         }
     }
 }
