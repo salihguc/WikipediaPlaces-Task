@@ -29,11 +29,17 @@ final class CustomLocationViewModel: ObservableObject {
     }
     
     var urlFromLocation: URL? {
-        let path = "wikipedia://places/?WMFLatitude=\(latitude)&WMFLongitude=\(longitude)"
-        return URL(string: path)
+        guard let lat = Double(normalized(latitude)), let lon = Double(normalized(longitude)) else { return nil }
+        
+        return WikipediaDeepLink.places(latitude: lat,
+                                        longitude: lon).url
     }
     
     func cannotOpenUrl() {
         showWikipediaNotInstalledAlert = true
+    }
+    
+    private func normalized(_ text: String) -> String {
+        text.replacingOccurrences(of: ",", with: ".")
     }
 }

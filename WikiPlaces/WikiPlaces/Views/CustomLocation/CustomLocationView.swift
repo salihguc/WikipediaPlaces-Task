@@ -17,14 +17,14 @@ struct CustomLocationView: View {
         Form {
             Section(String(localized: "Coordinates")) {
                 TextField(String(localized: "Latitude"), text: $viewModel.latitude)
-                    .keyboardType(.decimalPad)
+                    .keyboardType(.numbersAndPunctuation)
                     .accessibilityHint(String(localized: "Enter a value between minus 90 and 90"))
                     .validate {
                         viewModel.validateLatitude
                     }
                 
                 TextField(String(localized: "Longitude"), text: $viewModel.longitude)
-                    .keyboardType(.decimalPad)
+                    .keyboardType(.numbersAndPunctuation)
                     .accessibilityHint(String(localized: "Enter a value between minus 180 and 180"))
                     .validate {
                         viewModel.validateLongitude

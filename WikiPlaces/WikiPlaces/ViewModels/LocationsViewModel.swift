@@ -34,8 +34,8 @@ final class LocationsViewModel: ObservableObject {
     }
     
     func urlFromLocation(location: Location) -> URL? {
-        let path = "wikipedia://places/?WMFLatitude=\(location.lat)&WMFLongitude=\(location.long)"
-        return URL(string: path)
+        return WikipediaDeepLink.places(latitude: location.lat,
+                                        longitude: location.long).url
     }
     
     func cannotOpenUrl() {
