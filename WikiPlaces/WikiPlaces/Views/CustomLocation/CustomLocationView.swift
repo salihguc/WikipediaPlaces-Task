@@ -18,12 +18,14 @@ struct CustomLocationView: View {
             Section(String(localized: "Coordinates")) {
                 TextField(String(localized: "Latitude"), text: $viewModel.latitude)
                     .keyboardType(.decimalPad)
+                    .accessibilityHint(String(localized: "Enter a value between minus 90 and 90"))
                     .validate {
                         viewModel.validateLatitude
                     }
                 
                 TextField(String(localized: "Longitude"), text: $viewModel.longitude)
                     .keyboardType(.decimalPad)
+                    .accessibilityHint(String(localized: "Enter a value between minus 180 and 180"))
                     .validate {
                         viewModel.validateLongitude
                     }
@@ -42,6 +44,7 @@ struct CustomLocationView: View {
                 } label: {
                     Label(String(localized: "Open in Wikipedia"), systemImage: DesignSystem.Icons.map)
                 }
+                .accessibilityHint(String(localized: "Opens Wikipedia Places at the entered coordinates"))
             }
         }
         .navigationTitle(String(localized: "Custom Location"))

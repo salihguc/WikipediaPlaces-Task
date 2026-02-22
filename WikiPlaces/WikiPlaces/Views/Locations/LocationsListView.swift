@@ -16,6 +16,8 @@ struct LocationsListView: View {
         Group {
             if viewModel.isLoading {
                 ProgressView(String(localized: "Loading locations..."))
+                    .accessibilityLabel(String(localized: "Loading locations"))
+                    .accessibilityAddTraits(.updatesFrequently)
             } else if let error = viewModel.errorMessage {
                 ContentUnavailableView {
                     Label(String(localized: "Unable to Load"), systemImage: DesignSystem.Icons.warning)

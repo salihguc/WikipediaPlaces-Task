@@ -24,7 +24,11 @@ struct LocationRowView: View {
             Image(systemName: DesignSystem.Icons.disclosure)
                 .font(.caption)
                 .foregroundStyle(DesignSystem.Colors.secondaryText)
+                .accessibilityHidden(true)
         }
-        
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(location.displayName), latitude \(location.lat, specifier: "%.2f"), longitude \(location.long, specifier: "%.2f")")
+        .accessibilityHint(String(localized: "Double tap to open in Wikipedia app"))
+
     }
 }

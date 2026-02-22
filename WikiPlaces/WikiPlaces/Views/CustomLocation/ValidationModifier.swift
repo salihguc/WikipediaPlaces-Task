@@ -20,16 +20,24 @@ private struct ValidationModifier: ViewModifier {
     func body(content: Content) -> some View {
         VStack(alignment: .leading, spacing: DesignSystem.Spacing.small) {
             content
+                .accessibilityValue(shouldShowError ? result.message : "")
+            
             if shouldShowError {
                 HStack(spacing: DesignSystem.Spacing.small) {
                     Image(systemName: DesignSystem.Icons.error)
                     Text(result.message)
                         .font(.caption)
                         .foregroundStyle(DesignSystem.Colors.error)
+                        .accessibilityHidden(true)
                 }
             }
         }
         .preference(key: ValidationPreferenceKey.self, value: [result])
+        .onChange(of: shouldShowError) {
+            if shouldShowError {
+                UIAccessibility.post(notification: .announcement, argument: result.message)
+            }
+        }
     }
 }
 
