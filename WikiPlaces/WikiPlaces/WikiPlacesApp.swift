@@ -10,10 +10,20 @@ import SwiftUI
 @main
 struct WikiPlacesApp: App {
     @StateObject private var viewModel = LocationsViewModel(service: LocationService())
+    @StateObject private var router = AppRouter()
     
     var body: some Scene {
         WindowGroup {
-            LocationsListView(viewModel: viewModel)
+            NavigationStack(path: $router.path) {
+                LocationsListView(viewModel: viewModel)
+                    .navigationDestination(for: Route.self) { route in
+                        switch route {
+                        case .customLocation:
+                            CustomLocationView()
+                        }
+                    }
+                    .environmentObject(router)
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct LocationsListView: View {
     @Environment(\.openURL) private var openURL
     @ObservedObject var viewModel: LocationsViewModel
+    @EnvironmentObject var router: AppRouter
     
     var body: some View {
         Group {
@@ -32,7 +33,7 @@ struct LocationsListView: View {
                     Text(String(localized: "No locations available. You can enter custom coordinates instead."))
                 } actions: {
                     Button {
-                        //TODO: Push to Custom Location View
+                        router.push(route: .customLocation)
                     } label: {
                         Text(String(localized: "Enter Custom Location"))
                     }
@@ -56,7 +57,7 @@ struct LocationsListView: View {
                     
                     Section {
                         Button {
-                            //TODO: Push to Custom Location View
+                            router.push(route: .customLocation)
                         } label: {
                             Text(String(localized: "Enter Custom Location"))
                         }
