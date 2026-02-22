@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LocationsListView: View {
+    @Environment(\.openURL) private var openURL
     @ObservedObject var viewModel: LocationsViewModel
     
     var body: some View {
@@ -40,7 +41,13 @@ struct LocationsListView: View {
                 List {
                     ForEach(viewModel.locations) { location in
                         Button {
-                            //TODO: Open Wikipedia App
+                            if let url = viewModel.urlFromLocation(location: location) {
+                                openURL(url) { accepted in
+                                    if !accepted {
+                                        viewModel.cannotOpenUrl()
+                                    }
+                                }
+                            }
                         } label: {
                             Text(location.displayName)
                         }
@@ -60,6 +67,11 @@ struct LocationsListView: View {
         .navigationTitle(String(localized: "Places"))
         .task {
             await viewModel.fetchLocations()
+        }
+        .alert(String(localized: "Wikipedia Not Installed"), isPresented: $viewModel.showWikipediaNotInstalledAlert) {
+            Button(String(localized: "OK"), role: .cancel) {}
+        } message: {
+            Text(String(localized: "Install the Wikipedia app to view locations on the map."))
         }
     }
 }

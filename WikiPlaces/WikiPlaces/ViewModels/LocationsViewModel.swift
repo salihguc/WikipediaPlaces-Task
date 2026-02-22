@@ -14,6 +14,7 @@ final class LocationsViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var locations: [Location] = []
     @Published var errorMessage: String?
+    @Published var showWikipediaNotInstalledAlert = false
     
     private let service: LocationServiceProtocol
     
@@ -30,5 +31,14 @@ final class LocationsViewModel: ObservableObject {
             errorMessage = error.localizedDescription
         }
         isLoading = false
+    }
+    
+    func urlFromLocation(location: Location) -> URL? {
+        let path = "wikipedia://places/?WMFLatitude=\(location.lat)&WMFLongitude=\(location.long)"
+        return URL(string: path)
+    }
+    
+    func cannotOpenUrl() {
+        showWikipediaNotInstalledAlert = true
     }
 }
