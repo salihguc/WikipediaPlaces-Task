@@ -39,30 +39,7 @@ struct LocationsListView: View {
                     }
                 }
             } else {
-                List {
-                    ForEach(viewModel.locations) { location in
-                        Button {
-                            if let url = viewModel.urlFromLocation(location: location) {
-                                openURL(url) { accepted in
-                                    if !accepted {
-                                        viewModel.cannotOpenUrl()
-                                    }
-                                }
-                            }
-                        } label: {
-                            Text(location.displayName)
-                        }
-                        .tint(.primary)
-                    }
-                    
-                    Section {
-                        Button {
-                            router.push(route: .customLocation)
-                        } label: {
-                            Text(String(localized: "Enter Custom Location"))
-                        }
-                    }
-                }
+                locationsList
             }
         }
         .navigationTitle(String(localized: "Places"))
@@ -73,6 +50,33 @@ struct LocationsListView: View {
             Button(String(localized: "OK"), role: .cancel) {}
         } message: {
             Text(String(localized: "Install the Wikipedia app to view locations on the map."))
+        }
+    }
+    
+    private var locationsList: some View {
+        List {
+            ForEach(viewModel.locations) { location in
+                Button {
+                    if let url = viewModel.urlFromLocation(location: location) {
+                        openURL(url) { accepted in
+                            if !accepted {
+                                viewModel.cannotOpenUrl()
+                            }
+                        }
+                    }
+                } label: {
+                    LocationRowView(location: location)
+                }
+                .tint(.primary)
+            }
+            
+            Section {
+                Button {
+                    router.push(route: .customLocation)
+                } label: {
+                    Text(String(localized: "Enter Custom Location"))
+                }
+            }
         }
     }
 }

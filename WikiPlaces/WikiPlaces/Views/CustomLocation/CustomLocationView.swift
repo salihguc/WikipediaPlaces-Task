@@ -15,7 +15,7 @@ struct CustomLocationView: View {
     
     var body: some View {
         Form {
-            Section(String(localized: "Coordinated")) {
+            Section(String(localized: "Coordinates")) {
                 TextField(String(localized: "Latitude"), text: $viewModel.latitude)
                     .keyboardType(.decimalPad)
                     .validate {
