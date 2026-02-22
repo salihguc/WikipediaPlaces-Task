@@ -18,7 +18,7 @@ struct LocationsListView: View {
                 ProgressView(String(localized: "Loading locations..."))
             } else if let error = viewModel.errorMessage {
                 ContentUnavailableView {
-                    Label(String(localized: "Unable to Load"), systemImage: "exclamationmark.triangle")
+                    Label(String(localized: "Unable to Load"), systemImage: DesignSystem.Icons.warning)
                 } description: {
                     Text(error)
                 } actions: {
@@ -28,7 +28,7 @@ struct LocationsListView: View {
                 }
             } else if viewModel.locations.isEmpty {
                 ContentUnavailableView {
-                    Label(String(localized: "No Locations"), systemImage: "map")
+                    Label(String(localized: "No Locations"), systemImage: DesignSystem.Icons.map)
                 } description: {
                     Text(String(localized: "No locations available. You can enter custom coordinates instead."))
                 } actions: {
@@ -74,7 +74,7 @@ struct LocationsListView: View {
                 Button {
                     router.push(route: .customLocation)
                 } label: {
-                    Text(String(localized: "Enter Custom Location"))
+                    Label(String(localized: "Custom Location"), systemImage: DesignSystem.Icons.customLocation)
                 }
             }
         }

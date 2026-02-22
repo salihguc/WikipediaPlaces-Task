@@ -11,24 +11,20 @@ struct LocationRowView: View {
     let location: Location
     var body: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: DesignSystem.Spacing.small) {
                 Text(location.displayName)
                     .font(.headline)
                 Text("Lat: \(location.lat, specifier: "%.4f"), Lon: \(location.long, specifier: "%.4f")")
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(DesignSystem.Colors.secondaryText)
             }
             
             Spacer()
             
-            Image(systemName: "chevron.right")
+            Image(systemName: DesignSystem.Icons.disclosure)
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(DesignSystem.Colors.secondaryText)
         }
         
     }
 }
-
-//#Preview {
-//    LocationRowView()
-//}

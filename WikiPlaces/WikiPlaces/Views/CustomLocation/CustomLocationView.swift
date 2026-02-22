@@ -40,7 +40,7 @@ struct CustomLocationView: View {
                         }
                     }
                 } label: {
-                    Label(String(localized: "Open in Wikipedia"), systemImage: "map")
+                    Label(String(localized: "Open in Wikipedia"), systemImage: DesignSystem.Icons.map)
                 }
             }
         }

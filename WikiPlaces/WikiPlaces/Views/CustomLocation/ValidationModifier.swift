@@ -18,14 +18,14 @@ private struct ValidationModifier: ViewModifier {
     }
     
     func body(content: Content) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: DesignSystem.Spacing.small) {
             content
             if shouldShowError {
-                HStack(spacing: 4) {
-                    Image(systemName: "exclamationmark.circle")
+                HStack(spacing: DesignSystem.Spacing.small) {
+                    Image(systemName: DesignSystem.Icons.error)
                     Text(result.message)
                         .font(.caption)
-                        .foregroundStyle(.red)
+                        .foregroundStyle(DesignSystem.Colors.error)
                 }
             }
         }
