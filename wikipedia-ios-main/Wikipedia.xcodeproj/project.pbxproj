@@ -402,6 +402,7 @@
 		41FCAA3621C844CB001D8411 /* ReadingListEntryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FCAA3521C844CB001D8411 /* ReadingListEntryCollectionViewController.swift */; };
 		41FCAA3721C844CB001D8411 /* ReadingListEntryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FCAA3521C844CB001D8411 /* ReadingListEntryCollectionViewController.swift */; };
 		41FCAA3821C844CB001D8411 /* ReadingListEntryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FCAA3521C844CB001D8411 /* ReadingListEntryCollectionViewController.swift */; };
+		531F0D0C2F4BDA64003DFA4B /* NSUserActivity_WMFExtensionsCoordinateDeepLinkTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 531F0D0B2F4BDA64003DFA4B /* NSUserActivity_WMFExtensionsCoordinateDeepLinkTest.m */; };
 		533AB8AE259792A9003A43D9 /* wikipedia-language-variants.json in Resources */ = {isa = PBXBuildFile; fileRef = 533AB8AD259792A9003A43D9 /* wikipedia-language-variants.json */; };
 		535F16D625CE11A300875AAD /* MWKDataStore+LanguageVariantMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535F16D525CE11A300875AAD /* MWKDataStore+LanguageVariantMigration.swift */; };
 		53A575FA2602C845009835E6 /* WMFAppViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A575F92602C845009835E6 /* WMFAppViewController+Extensions.swift */; };
@@ -3220,6 +3221,7 @@
 		37C5C1FA2DC28D350082852E /* TabsOverviewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsOverviewCoordinator.swift; sourceTree = "<group>"; };
 		37FAFB342E45382000EEFEC5 /* DidYouKnowCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidYouKnowCache.swift; sourceTree = "<group>"; };
 		41FCAA3521C844CB001D8411 /* ReadingListEntryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListEntryCollectionViewController.swift; sourceTree = "<group>"; };
+		531F0D0B2F4BDA64003DFA4B /* NSUserActivity_WMFExtensionsCoordinateDeepLinkTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSUserActivity_WMFExtensionsCoordinateDeepLinkTest.m; sourceTree = "<group>"; };
 		533AB8AD259792A9003A43D9 /* wikipedia-language-variants.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "wikipedia-language-variants.json"; sourceTree = "<group>"; };
 		53478DE425AF8CB900F31DC2 /* Wikipedia 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Wikipedia 5.xcdatamodel"; sourceTree = "<group>"; };
 		535F16D525CE11A300875AAD /* MWKDataStore+LanguageVariantMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MWKDataStore+LanguageVariantMigration.swift"; sourceTree = "<group>"; };
@@ -7839,6 +7841,7 @@
 				00D280FB247F019C006BEE23 /* Date+ExtensionTests.swift */,
 				FFBA8C1827D824D8009E9B65 /* URL+ExtensionTests.swift */,
 				00A8F58526BDD5E700175B8E /* WidgetSampleContentTests.swift */,
+				531F0D0B2F4BDA64003DFA4B /* NSUserActivity_WMFExtensionsCoordinateDeepLinkTest.m */,
 			);
 			name = Tests;
 			path = WikipediaUnitTests/Code;
@@ -9955,6 +9958,7 @@
 				A452F9F924081A5500D8ED09 /* MockCLHeading.swift in Sources */,
 				00A8F58626BDD5E700175B8E /* WidgetSampleContentTests.swift in Sources */,
 				B0E8089C1C0D165B0065EBC0 /* XCTestCase+SwiftDefaults.swift in Sources */,
+				531F0D0C2F4BDA64003DFA4B /* NSUserActivity_WMFExtensionsCoordinateDeepLinkTest.m in Sources */,
 				BCD3200A1C6EC6BC00317D08 /* NSTimeZone+WMFTestingUtils.m in Sources */,
 				B0E808831C0D15A20065EBC0 /* MWKDataStore+TemporaryDataStore.m in Sources */,
 				004281B425E6EFC4004945B3 /* LSNocilla.m in Sources */,
