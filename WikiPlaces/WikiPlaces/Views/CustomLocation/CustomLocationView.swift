@@ -20,7 +20,6 @@ struct CustomLocationView: View {
         }
         .validatedForm(validator: formValidator)
         .navigationTitle(String(localized: "Custom Location"))
-        .wikipediaOpener()
     }
 }
 

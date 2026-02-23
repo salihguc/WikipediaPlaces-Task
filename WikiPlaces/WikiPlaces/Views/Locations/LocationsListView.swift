@@ -29,7 +29,6 @@ struct LocationsListView: View {
         .task {
             await viewModel.fetchLocations()
         }
-        .wikipediaOpener()
         .alert(String(localized: "Invalid Coordinates"), isPresented: $viewModel.showInvalidCoordinatesAlert) {
             Button(String(localized: "OK"), role: .cancel) {}
         } message: {

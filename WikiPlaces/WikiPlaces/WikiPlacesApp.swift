@@ -24,6 +24,7 @@ struct WikiPlacesApp: App {
                     }
                     .environmentObject(router)
             }
+            .wikipediaOpener()
         }
     }
 }
