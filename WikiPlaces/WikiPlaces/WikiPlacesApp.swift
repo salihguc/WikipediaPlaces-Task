@@ -9,9 +9,23 @@ import SwiftUI
 
 @main
 struct WikiPlacesApp: App {
-    @StateObject private var viewModel = LocationsViewModel(service: LocationService())
+    @StateObject private var viewModel: LocationsViewModel
     @StateObject private var router = AppRouter()
-    
+
+    init() {
+        let service: LocationServiceProtocol
+        #if DEBUG
+        if CommandLine.arguments.contains("--uitesting") {
+            service = StubLocationService()
+        } else {
+            service = LocationService()
+        }
+        #else
+        service = LocationService()
+        #endif
+        _viewModel = StateObject(wrappedValue: LocationsViewModel(service: service))
+    }
+
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $router.path) {
