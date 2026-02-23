@@ -30,7 +30,7 @@ enum CoordinateValidator {
         return .valid
     }
     
-    private static func normalized(_ text: String) -> String {
+    static func normalized(_ text: String) -> String {
         text.replacingOccurrences(of: ",", with: ".")
     }
 }

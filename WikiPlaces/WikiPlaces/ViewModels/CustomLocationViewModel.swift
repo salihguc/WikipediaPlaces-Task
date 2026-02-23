@@ -27,13 +27,10 @@ final class CustomLocationViewModel: ObservableObject {
     }
     
     var urlFromLocation: URL? {
-        guard let lat = Double(normalized(latitude)), let lon = Double(normalized(longitude)) else { return nil }
-        
+        guard let lat = Double(CoordinateValidator.normalized(latitude)),
+              let lon = Double(CoordinateValidator.normalized(longitude)) else { return nil }
+
         return WikipediaDeepLink.places(latitude: lat,
                                         longitude: lon).url
-    }
-    
-    private func normalized(_ text: String) -> String {
-        text.replacingOccurrences(of: ",", with: ".")
     }
 }
