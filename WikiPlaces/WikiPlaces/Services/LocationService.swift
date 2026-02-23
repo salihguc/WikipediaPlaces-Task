@@ -7,39 +7,30 @@
 
 import Foundation
 
-enum LocationServiceError: LocalizedError {
-    case decodingError(error: Error)
-    
-    var errorDescription: String? {
-        switch self {
-        case .decodingError(let error):
-            return String(localized: "Failed to parse locations data")
-        }
-    }
-}
-
 protocol LocationServiceProtocol {
     func fetchLocations() async throws -> [Location]
 }
 
 struct LocationService: LocationServiceProtocol {
     private let session: URLSession
-    private let url: URL
-    
+    private let configuration: APIConfiguration
+
     init(session: URLSession = .shared,
-         url: URL = URL(string: "https://raw.githubusercontent.com/abnamrocoesd/assignment-ios/main/locations.json")!) {
+         configuration: APIConfiguration = .default) {
         self.session = session
-        self.url = url
+        self.configuration = configuration
     }
-    
-    
+
     func fetchLocations() async throws -> [Location] {
-        let (data, urlResponse) = try await session.data(from: url)
+        guard let url = configuration.url(for: .locations) else {
+            throw ServiceError.invalidURL
+        }
+        let (data, _) = try await session.data(from: url)
         do {
             let response = try JSONDecoder().decode(LocationsResponse.self, from: data)
             return response.locations
         } catch {
-            throw LocationServiceError.decodingError(error: error)
+            throw ServiceError.decodingError(error: error)
         }
     }
 }
