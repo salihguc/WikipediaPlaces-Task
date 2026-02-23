@@ -12,7 +12,6 @@ import Combine
 final class LocationsViewModel: ObservableObject {
     @Published var state: ViewState = .loading
 
-    @Published var showWikipediaNotInstalledAlert = false
     @Published var showInvalidCoordinatesAlert = false
     
     private let service: LocationServiceProtocol
@@ -30,20 +29,6 @@ final class LocationsViewModel: ObservableObject {
         } catch {
             state = .error(error.localizedDescription)
         }
-    }
-    
-    func urlFromLocation(location: Location) -> URL? {
-        if let url = WikipediaDeepLink.places(latitude: location.lat,
-                                              longitude: location.long).url {
-            return url
-        } else {
-            showInvalidCoordinatesAlert = true
-            return nil
-        }
-    }
-    
-    func cannotOpenUrl() {
-        showWikipediaNotInstalledAlert = true
     }
 }
 

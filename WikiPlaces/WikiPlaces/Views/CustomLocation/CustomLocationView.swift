@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CustomLocationView: View {
-    @Environment(\.openURL) private var openURL
+    @Environment(\.openWikipedia) private var openWikipedia
     
     @StateObject private var viewModel = CustomLocationViewModel()
     @State private var formValidator = FormValidator()
@@ -20,12 +20,7 @@ struct CustomLocationView: View {
         }
         .validatedForm(validator: formValidator)
         .navigationTitle(String(localized: "Custom Location"))
-        .alert(String(localized: "Wikipedia Not Installed"),
-               isPresented: $viewModel.showWikipediaNotInstalledAlert) {
-            Button(String(localized: "OK"), role: .cancel) {}
-        } message: {
-            Text(String(localized: "Install the Wikipedia app to view locations on the map."))
-        }
+        .wikipediaOpener()
     }
 }
 
@@ -54,11 +49,7 @@ extension CustomLocationView {
             Button {
                 if formValidator.submit(),
                    let url = viewModel.urlFromLocation {
-                    openURL(url) { accepted in
-                        if !accepted {
-                            viewModel.cannotOpenUrl()
-                        }
-                    }
+                    openWikipedia(url)
                 }
             } label: {
                 Label(String(localized: "Open in Wikipedia"), systemImage: DesignSystem.Icons.map)

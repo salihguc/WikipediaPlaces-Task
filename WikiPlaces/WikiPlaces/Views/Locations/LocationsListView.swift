@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LocationsListView: View {
-    @Environment(\.openURL) private var openURL
+    @Environment(\.openWikipedia) private var openWikipedia
     @ObservedObject var viewModel: LocationsViewModel
     @EnvironmentObject var router: AppRouter
     
@@ -29,11 +29,7 @@ struct LocationsListView: View {
         .task {
             await viewModel.fetchLocations()
         }
-        .alert(String(localized: "Wikipedia Not Installed"), isPresented: $viewModel.showWikipediaNotInstalledAlert) {
-            Button(String(localized: "OK"), role: .cancel) {}
-        } message: {
-            Text(String(localized: "Install the Wikipedia app to view locations on the map."))
-        }
+        .wikipediaOpener()
         .alert(String(localized: "Invalid Coordinates"), isPresented: $viewModel.showInvalidCoordinatesAlert) {
             Button(String(localized: "OK"), role: .cancel) {}
         } message: {
@@ -48,12 +44,10 @@ extension LocationsListView {
         List {
             ForEach(locations) { location in
                 Button {
-                    if let url = viewModel.urlFromLocation(location: location) {
-                        openURL(url) { accepted in
-                            if !accepted {
-                                viewModel.cannotOpenUrl()
-                            }
-                        }
+                    if let url = location.wikipediaURL {
+                        openWikipedia(url)
+                    } else {
+                        viewModel.showInvalidCoordinatesAlert = true
                     }
                 } label: {
                     LocationRowView(location: location)

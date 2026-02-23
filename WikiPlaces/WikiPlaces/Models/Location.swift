@@ -19,6 +19,10 @@ struct Location: Codable, Equatable, Identifiable {
     var displayName: String {
         name ?? String(localized: "Unknown location")
     }
+
+    var wikipediaURL: URL? {
+        WikipediaDeepLink.places(latitude: lat, longitude: long).url
+    }
 }
 
 struct LocationsResponse: Codable {

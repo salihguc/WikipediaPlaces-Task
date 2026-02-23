@@ -16,8 +16,6 @@ final class CustomLocationViewModel: ObservableObject {
     let latitudeRange: ClosedRange<Double> = -90...90
     let longitudeRange: ClosedRange<Double> = -180...180
     
-    @Published var showWikipediaNotInstalledAlert = false
-    
     var validateLatitude: ValidationResult {
         CoordinateValidator.result(for: latitude,
                                    range: latitudeRange)
@@ -33,10 +31,6 @@ final class CustomLocationViewModel: ObservableObject {
         
         return WikipediaDeepLink.places(latitude: lat,
                                         longitude: lon).url
-    }
-    
-    func cannotOpenUrl() {
-        showWikipediaNotInstalledAlert = true
     }
     
     private func normalized(_ text: String) -> String {
