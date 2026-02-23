@@ -10,11 +10,10 @@ import Combine
 
 @MainActor
 final class LocationsViewModel: ObservableObject {
-    
-    @Published var isLoading = false
-    @Published var locations: [Location] = []
-    @Published var errorMessage: String?
+    @Published var state: ViewState = .loading
+
     @Published var showWikipediaNotInstalledAlert = false
+    @Published var showInvalidCoordinatesAlert = false
     
     private let service: LocationServiceProtocol
     
@@ -23,22 +22,36 @@ final class LocationsViewModel: ObservableObject {
     }
     
     func fetchLocations() async {
-        isLoading = true
-        errorMessage = nil
+        state = .loading
+        
         do {
-            locations = try await service.fetchLocations()
+            let locations = try await service.fetchLocations()
+            state = locations.isEmpty ? .empty : .loaded(locations)
         } catch {
-            errorMessage = error.localizedDescription
+            state = .error(error.localizedDescription)
         }
-        isLoading = false
     }
     
     func urlFromLocation(location: Location) -> URL? {
-        return WikipediaDeepLink.places(latitude: location.lat,
-                                        longitude: location.long).url
+        if let url = WikipediaDeepLink.places(latitude: location.lat,
+                                              longitude: location.long).url {
+            return url
+        } else {
+            showInvalidCoordinatesAlert = true
+            return nil
+        }
     }
     
     func cannotOpenUrl() {
         showWikipediaNotInstalledAlert = true
+    }
+}
+
+extension LocationsViewModel {
+    enum ViewState {
+        case loading
+        case error(String)
+        case empty
+        case loaded([Location])
     }
 }
